@@ -3,6 +3,7 @@ import { OrderService } from "../services/order.service";
 import type { OrderDTO } from "../dtos/order.dto";
 
 
+
 export function useOrders() {
     return useQuery<OrderDTO[]>({
         queryKey: ['orders'],
@@ -18,8 +19,24 @@ export function useOrder(id: string) {
     });
 }
 
+export function useOrdersEntregues(idUser: string) {
+    return useQuery<OrderDTO[]>({
+        queryKey: ['orders-entregues', idUser],
+        queryFn: () => OrderService.listOrdersEntregues(idUser),
+        enabled: !!idUser // evita chamar antes de existir user
+    });
+}
+
 export function useCreateOrder() {
     return useMutation<OrderDTO, Error, Omit<OrderDTO, 'id'>>({
-        mutationFn: (order: Omit<OrderDTO, 'id'>) => OrderService.create(order)
+        mutationFn: (order) => OrderService.create(order)
+    });
+}
+
+export function useOrdersCustommer(idUser: string) {
+    return useQuery<OrderDTO[]>({
+        queryKey: ['orders-user', idUser],
+        queryFn: () => OrderService.listOrderCustommer(idUser),
+        enabled: !!idUser 
     });
 }

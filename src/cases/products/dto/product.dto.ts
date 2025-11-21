@@ -8,4 +8,6 @@ export interface ProductDTO {
   price: number;
   active: boolean;
   category: CategoryDTO;
+  rating: number;    
+  ratingsCount: number;
 }

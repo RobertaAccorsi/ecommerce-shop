@@ -1,8 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import type { CustomerDTO } from "../dto/customer-dto";
 import { CustomerService } from "../service/customer-service";
-
+import type { CustomerDTO } from "../dto/customer-dto";
 
 export function useCustomers() {
     return useQuery<CustomerDTO[]>({
@@ -38,4 +37,13 @@ export function useUpdateCustomer() {
             toast.error(`Erro ao alterar: ${error.message}`);
         }
     })
+}
+
+
+export function useCustomerByAuthId(authId: string) {
+    return useQuery({
+        queryKey: ["customerByAuthId", authId],
+        queryFn: () => CustomerService.getByAuthId(authId),
+        enabled: !!authId, // só executa se tiver authId
+    });
 }
