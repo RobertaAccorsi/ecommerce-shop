@@ -9,9 +9,9 @@ import { useState } from "react"
 
 import { StarRating } from "@/components/layout/star-rating"
 import { useRateProduct } from "@/cases/products/hooks/use-product"
-import { useOrdersEntregues } from "../hooks/use-order"
 import type { OrderDTO } from "../dtos/order.dto"
 import type { OrderItemDTO } from "../dtos/order-item.dto"
+import { useOrdersEntregues } from "../hooks/use-order"
 
 export function OrderHistoryLayout() {
 

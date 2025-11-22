@@ -39,9 +39,12 @@ export function ProductCard({ product }: ProductCardProps) {
                     className="absolute top-3 right-3"
                 >
                     <Heart
-                        className={`w-6 h-6 transition ${favorite ? "fill-red-500 text-red-500" : "text-gray-400 hover:text-red-400"
-                            }`}
-                    />
+  className={`w-6 h-6 transition ${
+    favorite 
+      ? "fill-blue-500 text-blue-500" 
+      : "text-gray-400 hover:text-blue-400"
+  }`}
+/>
                 </button>
 
                 <div className="flex flex-col gap-1">
@@ -50,31 +53,31 @@ export function ProductCard({ product }: ProductCardProps) {
                     </h2>
 
                     {product.category && (
-                        <div className="flex items-center text-sm text-gray-500 gap-1">
-                            <Tag className="w-4 h-4" />
-                            {product.category.name}
-                        </div>
+                       <div className="flex items-center text-sm text-gray-600 gap-1">
+  <Tag className="w-4 h-4 text-blue-500" />
+  {product.category.name}
+</div>
                     )}
 
                     {product.price !== undefined && (
-                        <p className="text-xl font-bold text-primary">
-                            R$ {product.price}
-                        </p>
+                        <p className="text-xl font-bold text-blue-600">
+  R$ {product.price}
+</p>
                     )}
                 </div>
 
                 {/* Botão adicionar ao carrinho */}
-                <button
-                    onClick={handleAddToCart}
-                    className="
-            mt-2 w-full flex items-center justify-center gap-2
-            bg-green-600 text-white py-2 rounded-lg
-            hover:bg-green-700 transition
-          "
-                >
-                    <ShoppingCart className="w-4 h-4" />
-                    Adicionar ao carrinho
-                </button>
+               <button
+  onClick={handleAddToCart}
+  className="
+    mt-2 w-full flex items-center justify-center gap-2
+    bg-blue-600 text-white py-2 rounded-lg
+    hover:bg-blue-700 transition shadow-sm
+  "
+>
+  <ShoppingCart className="w-4 h-4" />
+  Adicionar ao carrinho
+</button>
             </CardContent>
         </Card>
     );

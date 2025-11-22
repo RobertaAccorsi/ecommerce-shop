@@ -84,11 +84,11 @@ export default function ProductLayout() {
         </div>
 
         <button
-          onClick={handleFilter}
-          className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition"
-        >
-          Filtrar
-        </button>
+  onClick={handleFilter}
+  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition shadow-sm"
+>
+  Filtrar
+</button>
       </div>
 
       {/* Lista */}

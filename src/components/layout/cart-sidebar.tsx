@@ -2,11 +2,13 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ShoppingCart, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
 import { useCustomerByAuthId } from "@/cases/customers/hooks/use-customer";
 import { toast } from "react-toastify";
 import { useCartContext } from "@/cases/cart/hooks/use-cart-context";
 import { useCreateOrder } from "@/cases/oders/hooks/use-order";
 import type { OrderDTO } from "@/cases/oders/dtos/order.dto";
+import type { ProductDTO } from "@/cases/products/dto/product.dto";
 
 export function CartSidebar() {
     const { cart, removeFromCart } = useCartContext();
@@ -16,10 +18,7 @@ export function CartSidebar() {
     const user = userStorage ? JSON.parse(userStorage) : null;
     const { data: customer } = useCustomerByAuthId(user?.id);
 
-    // 🔥 Filtrar itens do usuário logado
     const cartFiltered = cart.filter(item => item.userId === user?.id);
-
-    console.log("Customer in CartSidebar:", customer);
 
     const handleCheckout = () => {
         if (!customer) {
@@ -33,7 +32,7 @@ export function CartSidebar() {
             total: cartFiltered.reduce((sum, item) => sum + item.price * item.quantity, 0),
             shipping: 10.0,
             items: cartFiltered.map(item => ({
-                product: item.id as string,
+                product: { id: item.id } as ProductDTO,
                 quantity: item.quantity,
                 value: item.price,
             }))
@@ -47,18 +46,18 @@ export function CartSidebar() {
     return (
         <Sheet>
             <SheetTrigger asChild>
-                <div className="relative cursor-pointer">
-                    <div className="bg-black text-white flex w-10 h-10 items-center justify-center rounded-xl">
-                        <ShoppingCart className="w-5 h-5" />
-                    </div>
+  <div className="relative cursor-pointer">
+    <div className="bg-blue-600 text-white flex w-10 h-10 items-center justify-center rounded-xl hover:bg-blue-700 transition shadow-sm">
+      <ShoppingCart className="w-5 h-5" />
+    </div>
 
-                    {cartFiltered.length > 0 && (
-                        <span className=" absolute -top-2 -right-2 bg-red-600 text-white w-5 h-5 flex items-center justify-center  text-xs font-bold rounded-full">
-                            {cartFiltered.length}
-                        </span>
-                    )}
-                </div>
-            </SheetTrigger>
+    {cartFiltered.length > 0 && (
+      <span className="absolute -top-2 -right-2 bg-blue-500 text-white w-5 h-5 flex items-center justify-center text-xs font-bold rounded-full shadow-sm">
+        {cartFiltered.length}
+      </span>
+    )}
+  </div>
+</SheetTrigger>
 
             <SheetContent
                 side="right"

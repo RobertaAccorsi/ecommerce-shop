@@ -1,4 +1,3 @@
-
 import type { ProductDTO } from "@/cases/products/dto/product.dto";
 
 export interface OrderItemDTO {
@@ -6,4 +5,4 @@ export interface OrderItemDTO {
     product: ProductDTO;
     quantity: number;
     value: number;
-}
+} 

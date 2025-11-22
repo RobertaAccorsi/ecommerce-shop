@@ -15,7 +15,7 @@ export function OrderDataTable() {
 
     const openRatingSidebar = (order: OrderDTO) => {
         console.log("Abrir sidebar para avaliar:", order);
-       
+        // aqui você abre o drawer, sidebar etc.
     };
 
     return (
